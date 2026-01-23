@@ -1,6 +1,6 @@
 ## <Project Name>
 
-<Project fast description>
+Analyses microservices with AI and provide insights to reduce their accouplament
   
 ## How It Works
 

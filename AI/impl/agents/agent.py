@@ -20,13 +20,14 @@ class Agent(BaseModel):
                 + "on base in this context and preferences, respond the user message,"
                 + " focus on solving what he asked or helping"
                 + " him understand what he wants to understand"
+                + " be objective"
                 + " message:"
                 + message)
         response = self.client.models.generate_content(
             model="gemini-3-flash-preview",
             contents = prompt,
              config=types.GenerateContentConfig(
-                thinking_config=types.ThinkingConfig(thinking_level=ThinkingLevel.HIGH)
+                thinking_config=types.ThinkingConfig(thinking_level=ThinkingLevel.MEDIUM)
             ),
         )
         return response.text

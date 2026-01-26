@@ -2,3 +2,4 @@
 .env
 AI/impl/agents/__pycache__/
 AI/__pycache__/
+dataset

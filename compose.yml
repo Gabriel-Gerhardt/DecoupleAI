@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: pgvector/pgvector:latest
+    container_name: decouple-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: decoupleDB
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

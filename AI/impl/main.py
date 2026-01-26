@@ -2,7 +2,7 @@ import os
 
 from dotenv import load_dotenv
 
-from agents.agent import Agent
+from AI.impl.agents.agent import Agent
 
 
 def main():

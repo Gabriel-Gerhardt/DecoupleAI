@@ -6,7 +6,9 @@ from pydantic import BaseModel
 from typing import Any, Optional, List
 
 TARGET_DIRS = {"src", "app", "apps", "service", "services", "backend", "api", "server"}
-FILES = {"dockerfile", "docker-compose.yml", "docker-compose.yaml", "compose.yml", "compose.yaml"}
+FILES = {"dockerfile", "docker-compose.yml", "docker-compose.yaml", "compose.yml", "compose.yaml", "readme.md", "readme.rst", "readme.txt"}
+ESSENTIAL_EXTS = [".yml", ".yaml", ".json", ".properties", ".xml", ".toml", ".ini", ".env"]
+CODE_EXTS = [".js", ".ts", ".py", ".rb", ".go", ".java", ".kt", ".scala"]
 IGNORE_DIRS = {".git", "target", "build", "node_modules", "__pycache__"}
 
 class GitCrawler(BaseModel):
@@ -47,14 +49,17 @@ class GitCrawler(BaseModel):
         self.modules = modules
         return None
 
-    def crawl_module(self,module_path):
+    def crawl_module(self, module_path):
         collected = []
 
         for root, dirs, files in os.walk(module_path):
             dirs[:] = [d for d in dirs if d not in IGNORE_DIRS]
 
             for f in files:
-                collected.append(Path(root) / f)
+                f_lower = f.lower()
+                if (f_lower in FILES or
+                        any(f_lower.endswith(ext) for ext in ESSENTIAL_EXTS + CODE_EXTS)):
+                    collected.append(Path(root) / f)
 
         return collected
 

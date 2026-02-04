@@ -1,7 +1,7 @@
 import pandas as pd
 from dotenv import load_dotenv
 
-from AI.impl.integration.gitCrawler import GitCrawler
+from AI.impl.modules.gitcrawler import GitCrawler
 
 load_dotenv()
 def format_csv(name):
@@ -20,7 +20,6 @@ def format_csv(name):
         if not repo_df.empty:
             all_code.append(repo_df)
     final_df = pd.concat(all_code, ignore_index=True)
-
     final_df.to_csv('../../../dataset/formatted/'+name)
 
 
@@ -31,7 +30,7 @@ def reconstruct_df(crawler:GitCrawler, meta_row):
     for p in repo_files:
         try:
             content = p.read_text(errors="ignore")
-        except Exception:
+        except RuntimeError:
             continue
         rows.append({
             "URL": meta_row["URL"],
@@ -41,5 +40,6 @@ def reconstruct_df(crawler:GitCrawler, meta_row):
             "path": str(p),
             "code": content
         })
+    print(pd.DataFrame(rows))
     return pd.DataFrame(rows)
 format_csv("MicroservicesDataset.csv")

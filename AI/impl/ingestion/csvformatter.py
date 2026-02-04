@@ -13,16 +13,15 @@ def format_csv(name):
                 "n_microservices",
                 "Developed by"])
     df = df[df['Developed by'].str.contains("Industry", na=False)]
-
     for _, row in df.iterrows():
         crawler.repo_url = row["URL"]
+        crawler.path = "../../../repos"
         repo_df = reconstruct_df(crawler, row)
         if not repo_df.empty:
             all_code.append(repo_df)
     final_df = pd.concat(all_code, ignore_index=True)
     final_df.to_csv('../../../dataset/formatted/'+name)
-
-
+    print(final_df)
 
 def reconstruct_df(crawler:GitCrawler, meta_row):
     repo_files = crawler.crawl_repo_code()
@@ -40,6 +39,6 @@ def reconstruct_df(crawler:GitCrawler, meta_row):
             "path": str(p),
             "code": content
         })
-    print(pd.DataFrame(rows))
     return pd.DataFrame(rows)
+
 format_csv("MicroservicesDataset.csv")

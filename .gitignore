@@ -7,3 +7,4 @@ dataset
 repos
 AI/impl/ingestion/repos
 AI/impl/integration/github/__pycache__/gitCrawler.cpython-312.pyc
+AI/impl/modules/__pycache__/

@@ -16,8 +16,9 @@ class GitCrawler(BaseModel):
     modules : Optional[List[str]] = None
     path : Optional[str] = None
 
-    def clone_repo(self, base_dir="repos"):
-        base_dir = Path(base_dir)
+    def clone_repo(self, path = "repos"):
+        self.path = path
+        base_dir = Path(path)
         base_dir.mkdir(exist_ok=True)
 
         name = self.repo_url.rstrip("/").split("/")[-1]
@@ -38,7 +39,7 @@ class GitCrawler(BaseModel):
         return repo_path
 
     def find_main_modules(self):
-        repo_path = Path("repos") / self.repo_url.rstrip("/").split("/")[-1]
+        repo_path = Path(self.path) / self.repo_url.rstrip("/").split("/")[-1]
         if not repo_path: return []
         modules = []
 

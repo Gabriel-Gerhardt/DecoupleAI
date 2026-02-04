@@ -2,17 +2,17 @@ import os
 import subprocess
 from pathlib import Path
 
-from github import Github
 from pydantic import BaseModel
 from typing import Any, Optional, List
 
 TARGET_DIRS = {"src", "app", "apps", "service", "services", "backend", "api", "server"}
-FILES = {"dockerfile"}
+FILES = {"dockerfile", "docker-compose.yml", "docker-compose.yaml", "compose.yml", "compose.yaml"}
 IGNORE_DIRS = {".git", "target", "build", "node_modules", "__pycache__"}
 
 class GitCrawler(BaseModel):
     repo_url : Optional[Any] = None
     modules : Optional[List[str]] = None
+    path : Optional[str] = None
 
     def clone_repo(self, base_dir="repos"):
         base_dir = Path(base_dir)
@@ -45,6 +45,7 @@ class GitCrawler(BaseModel):
                 modules.append(Path(item.path))
 
         self.modules = modules
+        return None
 
     def crawl_module(self,module_path):
         collected = []

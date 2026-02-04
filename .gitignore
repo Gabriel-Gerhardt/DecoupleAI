@@ -4,3 +4,6 @@ AI/impl/agents/__pycache__/
 AI/__pycache__/
 dataset
 .idea
+repos
+AI/impl/ingestion/repos
+AI/impl/integration/github/__pycache__/gitCrawler.cpython-312.pyc

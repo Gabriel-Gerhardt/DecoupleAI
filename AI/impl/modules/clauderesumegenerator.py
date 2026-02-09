@@ -1,14 +1,12 @@
 import os
+from typing import Any
 
-import dotenv
-from anthropic import Anthropic
 from anthropic.types import MessageParam
 from pydantic import BaseModel
 
 
-dotenv.load_dotenv()
 class ClaudeResumeGenerator(BaseModel):
-    client : Anthropic
+    client : Any
 
     def generateresume(self, data : str):
 

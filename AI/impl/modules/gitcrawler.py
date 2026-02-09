@@ -7,7 +7,7 @@ from typing import Any, Optional, List
 
 TARGET_DIRS = {"src", "app", "apps", "service", "services", "backend", "api", "server"}
 FILES = {"dockerfile", "docker-compose.yml", "docker-compose.yaml", "compose.yml", "compose.yaml", "readme.md", "readme.rst", "readme.txt"}
-ESSENTIAL_EXTS = [".yml", ".yaml", ".json", ".properties", ".xml", ".toml", ".ini", ".env"]
+ESSENTIAL_EXTS = [".yml", ".yaml", ".json", ".properties", ".xml", ".toml", ".ini", ".env",".md",".MD"]
 CODE_EXTS = [".js", ".ts", ".py", ".rb", ".go", ".java", ".kt", ".scala"]
 IGNORE_DIRS = {".git", "target", "build", "node_modules", "__pycache__"}
 
